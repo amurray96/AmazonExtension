@@ -19,11 +19,28 @@ deliveryCards.forEach(deliveryCard => {
   });
 
   const newDiv = document.createElement('div');
-  newDiv.textContent = 'Total: $' + totalPrice.toFixed(2);
-  newDiv.style.marginTop = '10px';
-  newDiv.style.backgroundColor = '#34eb43';
-  newDiv.style.fontWeight = 'bold';
-  newDiv.style.fontSize = '18px';
-  newDiv.style.padding = '5px';
+  newDiv.style.margin = '20px 0px';
   targetElement.appendChild(newDiv);
+
+  const totalDiv = document.createElement('div');
+  totalDiv.textContent = 'Total: $' + totalPrice.toFixed(2) + '*';
+  totalDiv.style.marginBottom = '5px';
+  totalDiv.style.backgroundColor = '#388E3C';
+  totalDiv.style.maxWidth = '150px';
+  totalDiv.style.color = 'white';
+  totalDiv.style.fontWeight = 'bold';
+  totalDiv.style.fontSize = '18px';
+  totalDiv.style.padding = '5px';
+  totalDiv.style.borderRadius = '5px';
+  totalDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+  totalDiv.style.fontFamily = "'Roboto', sans-serif";
+  totalDiv.style.textAlign = 'center';
+  newDiv.appendChild(totalDiv);
+
+
+  const newSpan = document.createElement('span');
+  newSpan.textContent = '*Estimated Total';
+  newSpan.style.fontFamily = "'Roboto', sans-serif";
+  newSpan.style.fontSize = '12px';
+  newDiv.appendChild(newSpan);
 });
