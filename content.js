@@ -5,6 +5,7 @@ deliveryCards.forEach(deliveryCard => {
   const itemsElement = deliveryCard.querySelector('.subscription-list-container');
   const subscriptionCards = itemsElement.querySelectorAll('div > .subscription-card');
 
+
   let totalPrice = 0;
   let totalSavings = 0;
   subscriptionCards.forEach(subscriptionCard => {
@@ -14,9 +15,9 @@ deliveryCards.forEach(deliveryCard => {
     let price = 0;
     const subscriptionPrice = subscriptionCard.querySelector('.subscription-price');
     if (subscriptionPrice) {
-      /* price = parseFloat(subscriptionPrice.textContent.slice(1)); */
       price = Math.floor(subscriptionPrice.textContent.slice(1) * 100) / 100;
     }
+
 
     let itemSavings = 0;
     let originalPrice = 0;
@@ -24,20 +25,21 @@ deliveryCards.forEach(deliveryCard => {
     discountRate = discountRate.textContent;
     const regex = /\d+/;
     const match = discountRate.match(regex);
+    let matchLog;
     if (match) {
+      matchLog = match[0], 10;
       const numberRate = parseInt(match[0], 10) / 100;
       originalPrice = price / (1 - numberRate);
       originalPrice = Math.floor(originalPrice * 100) / 100;
       itemSavings = originalPrice - price;
       itemSavings = Math.floor(itemSavings * 100) / 100;
-
     }
 
     let qty = 0;
     let itemTotalPrice = price;
     const itemQty = subscriptionCard.querySelector('.subscription-quantity-message');
     qty = itemQty ? parseFloat(itemQty.textContent.slice(5)) : 1;
-    /* itemTotalPrice *= qty; */ //Fix ----------
+    itemTotalPrice *= qty; //Fix ----------
     itemSavings *= qty;
 
 
@@ -58,13 +60,17 @@ deliveryCards.forEach(deliveryCard => {
 
 
     console.log("%c" + name, 'color: yellow;');
-    console.log('Price:', originalPrice, 'Discount:', price);
+    console.log('Price:', originalPrice, 'Discount Price:', price);
     console.log('Quantity:', qty, 'Item Total:', itemTotalPrice);
-    console.log('Savings:', itemSavings);
+    console.log('Discount:', matchLog + '%');
+    console.log('Item Savings:', itemSavings / qty, 'Total Savings:', itemSavings);
     console.log('Subscription Total:', totalPrice);
     console.log('Subscription Savings:', totalSavings)
     console.log('%c---------------------', 'color: red;');
   });
+
+  console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
+  console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
 
 
 
@@ -84,7 +90,7 @@ deliveryCards.forEach(deliveryCard => {
   const totalDiv = document.createElement('div');
   totalDiv.textContent = '$' + totalPrice;
   totalDiv.style.marginBottom = '10px';
-  totalDiv.style.backgroundColor = '#3784ad';
+  totalDiv.style.backgroundColor = '#232F3E';
   totalDiv.style.maxWidth = '130px';
   totalDiv.style.color = 'white';
   totalDiv.style.fontWeight = 'bold';
@@ -92,7 +98,6 @@ deliveryCards.forEach(deliveryCard => {
   totalDiv.style.padding = '5px';
   totalDiv.style.borderRadius = '5px';
   totalDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-  /* totalDiv.style.fontFamily = "'Roboto', sans-serif"; */
   totalDiv.style.fontFamily = 'inherit';
   totalDiv.style.textAlign = 'center';
   newDiv.appendChild(totalDiv);
@@ -111,7 +116,6 @@ deliveryCards.forEach(deliveryCard => {
   const savingsDiv = document.createElement('div');
   savingsDiv.textContent = '$' + totalSavings;
   savingsDiv.style.marginBottom = '5px';
-  /* savingsDiv.style.backgroundColor = '#388E3C'; */
   savingsDiv.style.backgroundColor = '#FF8F00';
   savingsDiv.style.maxWidth = '130px';
   savingsDiv.style.color = 'black';
