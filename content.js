@@ -20,6 +20,8 @@ deliveryCards.forEach(deliveryCard => {
       console.log("%c" + name, 'color: yellow;');
       console.log('SKIPPED');
       console.log('%c---------------------', 'color: red;');
+      console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
+      console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
       continue;
     }
 
@@ -45,6 +47,10 @@ deliveryCards.forEach(deliveryCard => {
     let itemTotalPrice = price;
     const itemQty = subscriptionCard.querySelector('.subscription-quantity-message');
     qty = itemQty ? parseFloat(itemQty.textContent.slice(5)) : 1;
+    if (qty > 1) {
+      itemQty.style.backgroundColor = '#ffd500';
+      itemQty.style.fontWeight = 'bold';
+    }
     itemTotalPrice *= qty; //Fix ----------
     itemSavings *= qty;
 
@@ -72,11 +78,9 @@ deliveryCards.forEach(deliveryCard => {
     console.log('Item Savings:', itemSavings / qty, 'Total Savings:', itemSavings);
     console.log('Subscription Total:', totalPrice);
     console.log('Subscription Savings:', totalSavings)
-    console.log('%c---------------------', 'color: red;');
   };
 
-  console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
-  console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
+  console.log('%c---------------------------------', 'color: #0ced00');
 
 
 
