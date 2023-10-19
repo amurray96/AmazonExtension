@@ -8,16 +8,22 @@ deliveryCards.forEach(deliveryCard => {
 
   let totalPrice = 0;
   let totalSavings = 0;
-  subscriptionCards.forEach(subscriptionCard => {
+  /*  subscriptionCards.forEach(subscriptionCard => { */
+
+  for (const subscriptionCard of subscriptionCards) {
     const subscriptionName = subscriptionCard.querySelector('.subscription-product-title');
     let name = subscriptionName ? subscriptionName.textContent : 'No Name';
 
     let price = 0;
-    const subscriptionPrice = subscriptionCard.querySelector('.subscription-price');
-    if (subscriptionPrice) {
-      price = Math.floor(subscriptionPrice.textContent.slice(1) * 100) / 100;
+    const subscriptionPrice = subscriptionCard.querySelector('.subscription-price') || false;
+    if (!subscriptionPrice) {
+      console.log("%c" + name, 'color: yellow;');
+      console.log('SKIPPED');
+      console.log('%c---------------------', 'color: red;');
+      continue;
     }
 
+    price = Math.floor(subscriptionPrice.textContent.slice(1) * 100) / 100;
 
     let itemSavings = 0;
     let originalPrice = 0;
@@ -67,7 +73,7 @@ deliveryCards.forEach(deliveryCard => {
     console.log('Subscription Total:', totalPrice);
     console.log('Subscription Savings:', totalSavings)
     console.log('%c---------------------', 'color: red;');
-  });
+  };
 
   console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
   console.log('%c$$$$$$$$$$$$$$$$$$$$$$$', 'color: #0ced00');
